@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MPEP Office Hours Archive</title>
+  <style>
+    :root {
+      --blue: #2563eb;
+      --blue-light: #dbeafe;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --gray: #6b7280;
+      --gray-light: #f3f4f6;
+      --border: #e5e7eb;
+      --text: #111827;
+      --badge-bg: #1e40af;
+      --badge-text: #fff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f9fafb;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--blue);
+      color: white;
+      padding: 20px 24px;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .search-bar input {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-bar input:focus {
+      border-color: var(--blue);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: white;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.15s;
+      color: var(--gray);
+    }
+
+    .filter-tab:hover { border-color: var(--blue); color: var(--blue); }
+
+    .filter-tab.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: white;
+    }
+
+    .module-filter {
+      padding: 8px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      background: white;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .results-meta {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+
+    .results-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .result-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .result-card.hvac { border-left: 4px solid var(--blue); }
+    .result-card.tfs  { border-left: 4px solid var(--green); }
+
+    .result-main { flex: 1; }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .program-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .program-badge.hvac { background: var(--blue-light); color: var(--blue); }
+    .program-badge.tfs  { background: var(--green-light); color: var(--green); }
+
+    .problem-id {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .module-name {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    .oh-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .oh-badge {
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      border-radius: 5px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: default;
+    }
+
+    .no-oh {
+      font-size: 0.8rem;
+      color: #d1d5db;
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray);
+    }
+
+    .empty-state .big { font-size: 2.5rem; margin-bottom: 12px; }
+    .empty-state h3 { font-size: 1.1rem; margin-bottom: 6px; color: var(--text); }
+
+    .stats-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+    }
+
+    .stat strong { font-size: 1.2rem; display: block; }
+
+    .updated {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.2rem; }
+      .result-card { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📚 MPEP Office Hours Archive</h1>
+  <p>Look up which problems have been covered in past Office Hours sessions</p>
+</header>
+
+<div class="container">
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search by problem # (e.g. 7-4) or module name..." autofocus>
+    <select class="module-filter" id="moduleFilter">
+      <option value="">All Modules</option>
+    </select>
+  </div>
+
+  <div class="filter-tabs">
+    <button class="filter-tab active" data-filter="all">All</button>
+    <button class="filter-tab" data-filter="HVAC">HVAC & Refrigeration</button>
+    <button class="filter-tab" data-filter="TFS">Thermal & Fluid Systems</button>
+    <button class="filter-tab" data-filter="covered">Covered in OH</button>
+    <button class="filter-tab" data-filter="not-covered">Not Yet Covered</button>
+  </div>
+
+  <div class="stats-bar" id="statsBar"></div>
+
+  <div class="results-meta" id="resultsMeta"></div>
+
+  <div class="results-grid" id="resultsGrid"></div>
+
+  <div class="updated" id="updatedNote"></div>
+
+</div>
+
+<script>
+let allData = [];
+let activeFilter = 'all';
+
+async function loadData() {
+  const res = await fetch('data.json');
+  const json = await res.json();
+
+  // Flatten into a single array
+  for (const [program, problems] of Object.entries(json)) {
+    if (program === 'lastUpdated') continue;
+    for (const p of problems) {
+      allData.push({ program, ...p });
+    }
+  }
+
+  document.getElementById('updatedNote').textContent =
+    `Last updated: ${json.lastUpdated} · ${allData.length} problems across HVAC and TFS`;
+
+  buildModuleFilter();
+  buildStats(json);
+  render();
+}
+
+function buildModuleFilter() {
+  const select = document.getElementById('moduleFilter');
+  const modules = [...new Set(allData.map(d => d.module))].sort();
+  for (const m of modules) {
+    const opt = document.createElement('option');
+    opt.value = m;
+    opt.textContent = m;
+    select.appendChild(opt);
+  }
+}
+
+function buildStats(json) {
+  const hvacTotal = json.HVAC.length;
+  const tfsTotal = json.TFS.length;
+  const hvacCovered = json.HVAC.filter(p => p.oh.length > 0).length;
+  const tfsCovered = json.TFS.filter(p => p.oh.length > 0).length;
+
+  // Find max OH number
+  let maxOH = 0;
+  for (const d of allData) for (const n of d.oh) if (n > maxOH) maxOH = n;
+
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat"><strong>${hvacCovered}/${hvacTotal}</strong>HVAC problems covered</div>
+    <div class="stat"><strong>${tfsCovered}/${tfsTotal}</strong>TFS problems covered</div>
+    <div class="stat"><strong>OH${maxOH}</strong>Most recent session</div>
+  `;
+}
+
+function getFilteredData() {
+  const query = document.getElementById('searchInput').value.toLowerCase().trim();
+  const module = document.getElementById('moduleFilter').value;
+
+  return allData.filter(d => {
+    // Program filter
+    if (activeFilter === 'HVAC' && d.program !== 'HVAC') return false;
+    if (activeFilter === 'TFS' && d.program !== 'TFS') return false;
+    if (activeFilter === 'covered' && d.oh.length === 0) return false;
+    if (activeFilter === 'not-covered' && d.oh.length > 0) return false;
+
+    // Module filter
+    if (module && d.module !== module) return false;
+
+    // Text search
+    if (query) {
+      const searchable = `${d.problem} ${d.module} ${d.program} ${d.oh.join(' ')}`.toLowerCase();
+      if (!searchable.includes(query)) return false;
+    }
+
+    return true;
+  });
+}
+
+function render() {
+  const filtered = getFilteredData();
+  const grid = document.getElementById('resultsGrid');
+  const meta = document.getElementById('resultsMeta');
+
+  meta.textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="big">🔍</div>
+        <h3>No results found</h3>
+        <p>Try a different search term or clear the filters</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(d => {
+    const cls = d.program.toLowerCase();
+    const ohHtml = d.oh.length > 0
+      ? d.oh.map(n => `<span class="oh-badge">OH ${n}</span>`).join('')
+      : `<span class="no-oh">Not yet covered in Office Hours</span>`;
+
+    return `
+      <div class="result-card ${cls}">
+        <div class="result-main">
+          <div class="result-header">
+            <span class="program-badge ${cls}">${d.program}</span>
+            <span class="problem-id">${d.problem}</span>
+            <span class="module-name">${d.module}</span>
+          </div>
+          <div class="oh-badges">${ohHtml}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// Event listeners
+document.getElementById('searchInput').addEventListener('input', render);
+document.getElementById('moduleFilter').addEventListener('change', render);
+
+document.querySelectorAll('.filter-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeFilter = tab.dataset.filter;
+    render();
+  });
+});
+
+loadData();
+</script>
+
+</body>
+</html>
