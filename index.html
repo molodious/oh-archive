@@ -212,6 +212,79 @@
       text-align: center;
     }
 
+    /* ── Info bar ── */
+    .info-bar {
+      background: white;
+      border-bottom: 1.5px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .next-oh {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+    }
+
+    .next-oh-label {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .next-oh-value {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .next-oh-countdown {
+      font-size: 0.78rem;
+      color: var(--gray);
+      background: var(--gray-light);
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+
+    .info-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--blue);
+      border: 1.5px solid var(--blue);
+    }
+
+    @media (max-width: 600px) {
+      .info-bar { flex-direction: column; align-items: flex-start; }
+    }
+
     /* ── Browse mode toggle ── */
     .mode-toggle {
       display: flex;
@@ -299,6 +372,23 @@
   <h1>📚 MPEP Office Hours Archive</h1>
   <p>Look up which Office Hours sessions covered any problem</p>
 </header>
+
+<div class="info-bar">
+  <div class="next-oh">
+    <span>🗓️</span>
+    <span class="next-oh-label">Next Office Hours:</span>
+    <span class="next-oh-value" id="nextOHDate">Loading…</span>
+    <span class="next-oh-countdown" id="nextOHCountdown"></span>
+  </div>
+  <div class="info-buttons">
+    <a class="btn btn-primary" href="https://1krikk21f5c.typeform.com/to/vG1JNo8R" target="_blank" rel="noopener">
+      ✏️ Submit a Question
+    </a>
+    <a class="btn btn-outline" href="https://mechanicalpeexamprep.thinkific.com/courses/take/office-hours-with-dan-molloy-pe" target="_blank" rel="noopener">
+      🎬 View Video Archive
+    </a>
+  </div>
+</div>
 
 <div class="container">
 
@@ -591,6 +681,54 @@ function setMode(mode) {
   document.getElementById('btnBrowse').classList.toggle('active', mode === 'browse');
 }
 
+// ── Next OH date (biweekly from OH115 = March 2 2026 8PM ET) ────
+function computeNextOH() {
+  // OH115 start time in ET (UTC-5 in March = EST)
+  const OH115 = new Date('2026-03-02T20:00:00-05:00');
+  const MS_PER_OH = 14 * 24 * 60 * 60 * 1000;
+  const now = new Date();
+
+  // How many full cycles since OH115?
+  const elapsed = now - OH115;
+  const cyclesSince = Math.floor(elapsed / MS_PER_OH);
+
+  // The next upcoming session
+  const nextNum = 115 + cyclesSince + (elapsed > 0 ? 1 : 0);
+  const nextDate = new Date(OH115.getTime() + (nextNum - 115) * MS_PER_OH);
+
+  // If within 30 min past start, still show it as "today"
+  const thirtyMin = 30 * 60 * 1000;
+  const effectiveDate = (now - nextDate) < thirtyMin ? nextDate : new Date(OH115.getTime() + (nextNum) * MS_PER_OH);
+  const effectiveNum  = (now - nextDate) < thirtyMin ? nextNum : nextNum + 1;
+
+  return { num: effectiveNum, date: effectiveDate };
+}
+
+function renderNextOH() {
+  const { num, date } = computeNextOH();
+  const now = new Date();
+
+  const dateStr = date.toLocaleDateString('en-US', {
+    weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
+    timeZone: 'America/New_York'
+  });
+
+  document.getElementById('nextOHDate').textContent = `OH ${num} · ${dateStr} at 8:00 PM ET`;
+
+  // Countdown
+  const diffMs = date - now;
+  if (diffMs < 0) {
+    document.getElementById('nextOHCountdown').textContent = 'Tonight!';
+  } else {
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const hrs  = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    if (days === 0) document.getElementById('nextOHCountdown').textContent = `in ${hrs}h`;
+    else if (days === 1) document.getElementById('nextOHCountdown').textContent = `tomorrow`;
+    else document.getElementById('nextOHCountdown').textContent = `in ${days} days`;
+  }
+}
+
+renderNextOH();
 loadData();
 </script>
 
