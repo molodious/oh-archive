@@ -14,8 +14,6 @@
       --gray-light: #f3f4f6;
       --border: #e5e7eb;
       --text: #111827;
-      --badge-bg: #1e40af;
-      --badge-text: #fff;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,188 +31,179 @@
       padding: 20px 24px;
     }
 
-    header h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    header p {
-      font-size: 0.85rem;
-      opacity: 0.85;
-    }
+    header h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+    header p  { font-size: 0.85rem; opacity: 0.85; }
 
     .container {
-      max-width: 900px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: 24px 16px;
+      padding: 32px 16px;
     }
 
-    .search-bar {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .search-bar input {
-      flex: 1;
-      min-width: 200px;
-      padding: 10px 14px;
+    /* ── Selector card ── */
+    .selector-card {
+      background: white;
       border: 1.5px solid var(--border);
-      border-radius: 8px;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .selector-card h2 {
       font-size: 1rem;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-
-    .search-bar input:focus {
-      border-color: var(--blue);
-    }
-
-    .filter-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .filter-tab {
-      padding: 6px 16px;
-      border-radius: 20px;
-      border: 1.5px solid var(--border);
-      background: white;
-      cursor: pointer;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.15s;
-      color: var(--gray);
-    }
-
-    .filter-tab:hover { border-color: var(--blue); color: var(--blue); }
-
-    .filter-tab.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: white;
-    }
-
-    .module-filter {
-      padding: 8px 12px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.875rem;
-      background: white;
-      cursor: pointer;
+      font-weight: 600;
+      margin-bottom: 16px;
       color: var(--text);
     }
 
-    .results-meta {
-      font-size: 0.8rem;
+    .selects {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 520px) {
+      .selects { grid-template-columns: 1fr; }
+    }
+
+    .select-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray);
+      margin-bottom: 5px;
+    }
+
+    .select-group select {
+      width: 100%;
+      padding: 9px 10px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: white;
+      color: var(--text);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+      transition: border-color 0.15s;
+    }
+
+    .select-group select:focus {
+      outline: none;
+      border-color: var(--blue);
+    }
+
+    .select-group select:disabled {
+      background-color: var(--gray-light);
+      color: #9ca3af;
+      cursor: default;
+    }
+
+    /* ── Result area ── */
+    .result-area {
+      min-height: 160px;
+    }
+
+    .placeholder {
+      text-align: center;
+      padding: 40px 20px;
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+
+    .placeholder .icon { font-size: 2rem; margin-bottom: 8px; }
+
+    .result-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .result-header {
+      padding: 16px 20px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .program-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .program-pill.hvac { background: var(--blue-light); color: var(--blue); }
+    .program-pill.tfs  { background: var(--green-light); color: var(--green); }
+
+    .result-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .result-module {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    .result-body {
+      padding: 16px 20px;
+    }
+
+    .result-body h3 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       color: var(--gray);
       margin-bottom: 12px;
     }
 
-    .results-grid {
+    .oh-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .result-card {
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .result-card.hvac { border-left: 4px solid var(--blue); }
-    .result-card.tfs  { border-left: 4px solid var(--green); }
-
-    .result-main { flex: 1; }
-
-    .result-header {
+    .oh-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 6px;
-    }
-
-    .program-badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .program-badge.hvac { background: var(--blue-light); color: var(--blue); }
-    .program-badge.tfs  { background: var(--green-light); color: var(--green); }
-
-    .problem-id {
-      font-weight: 700;
-      font-size: 1.05rem;
-    }
-
-    .module-name {
-      font-size: 0.85rem;
-      color: var(--gray);
-    }
-
-    .oh-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 6px;
-    }
-
-    .oh-badge {
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      border-radius: 5px;
-      padding: 2px 8px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: default;
-    }
-
-    .no-oh {
-      font-size: 0.8rem;
-      color: #d1d5db;
-      margin-top: 4px;
-      font-style: italic;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--gray);
-    }
-
-    .empty-state .big { font-size: 2.5rem; margin-bottom: 12px; }
-    .empty-state h3 { font-size: 1.1rem; margin-bottom: 6px; color: var(--text); }
-
-    .stats-bar {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .stat {
-      background: white;
-      border: 1.5px solid var(--border);
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--gray-light);
       border-radius: 8px;
-      padding: 10px 16px;
-      font-size: 0.85rem;
     }
 
-    .stat strong { font-size: 1.2rem; display: block; }
+    .oh-num {
+      font-weight: 700;
+      font-size: 0.9rem;
+      min-width: 50px;
+      color: var(--blue);
+    }
+
+    .oh-date {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    .not-covered {
+      padding: 20px;
+      text-align: center;
+      color: #9ca3af;
+    }
+
+    .not-covered .icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .not-covered p { font-size: 0.875rem; }
 
     .updated {
       font-size: 0.75rem;
@@ -223,171 +212,384 @@
       text-align: center;
     }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.2rem; }
-      .result-card { padding: 12px; }
+    /* ── Browse mode toggle ── */
+    .mode-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
     }
+
+    .mode-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: white;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray);
+      transition: all 0.15s;
+    }
+
+    .mode-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .mode-btn.active { background: var(--blue); border-color: var(--blue); color: white; }
+
+    /* ── Browse (search) mode ── */
+    .browse-panel { display: none; }
+    .browse-panel.visible { display: block; }
+    .lookup-panel { display: block; }
+    .lookup-panel.hidden { display: none; }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-input:focus { border-color: var(--blue); }
+
+    .browse-results { display: flex; flex-direction: column; gap: 6px; }
+
+    .browse-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .browse-card:hover { border-color: var(--blue); }
+    .browse-card.hvac { border-left: 4px solid var(--blue); }
+    .browse-card.tfs  { border-left: 4px solid var(--green); }
+
+    .browse-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .browse-oh-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+
+    .oh-chip {
+      background: #1e40af;
+      color: white;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .browse-meta { font-size: 0.82rem; margin-bottom: 2px; }
+    .browse-module { font-size: 0.78rem; color: var(--gray); }
+
+    .browse-empty { text-align: center; padding: 30px; color: #9ca3af; font-size: 0.875rem; }
+    .results-count { font-size: 0.78rem; color: var(--gray); margin-bottom: 8px; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>📚 MPEP Office Hours Archive</h1>
-  <p>Look up which problems have been covered in past Office Hours sessions</p>
+  <p>Look up which Office Hours sessions covered any problem</p>
 </header>
 
 <div class="container">
 
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search by problem # (e.g. 7-4) or module name..." autofocus>
-    <select class="module-filter" id="moduleFilter">
-      <option value="">All Modules</option>
-    </select>
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="btnLookup" onclick="setMode('lookup')">🔍 Problem Lookup</button>
+    <button class="mode-btn" id="btnBrowse" onclick="setMode('browse')">📋 Browse All</button>
   </div>
 
-  <div class="filter-tabs">
-    <button class="filter-tab active" data-filter="all">All</button>
-    <button class="filter-tab" data-filter="HVAC">HVAC & Refrigeration</button>
-    <button class="filter-tab" data-filter="TFS">Thermal & Fluid Systems</button>
-    <button class="filter-tab" data-filter="covered">Covered in OH</button>
-    <button class="filter-tab" data-filter="not-covered">Not Yet Covered</button>
+  <!-- LOOKUP MODE -->
+  <div class="lookup-panel" id="lookupPanel">
+
+    <div class="selector-card">
+      <h2>Select a problem</h2>
+      <div class="selects">
+        <div class="select-group">
+          <label>Program</label>
+          <select id="selProgram" onchange="onProgramChange()">
+            <option value="">— Choose —</option>
+            <option value="HVAC">HVAC & Refrigeration</option>
+            <option value="TFS">Thermal & Fluid Systems</option>
+          </select>
+        </div>
+        <div class="select-group">
+          <label>Module</label>
+          <select id="selModule" disabled onchange="onModuleChange()">
+            <option value="">— Choose —</option>
+          </select>
+        </div>
+        <div class="select-group">
+          <label>Problem #</label>
+          <select id="selProblem" disabled onchange="onProblemChange()">
+            <option value="">— Choose —</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-area" id="resultArea">
+      <div class="placeholder">
+        <div class="icon">👆</div>
+        Select a program, module, and problem to see its Office Hours history
+      </div>
+    </div>
+
   </div>
 
-  <div class="stats-bar" id="statsBar"></div>
-
-  <div class="results-meta" id="resultsMeta"></div>
-
-  <div class="results-grid" id="resultsGrid"></div>
+  <!-- BROWSE MODE -->
+  <div class="browse-panel" id="browsePanel">
+    <input type="text" class="search-input" id="browseSearch"
+      placeholder="Search by problem #, module, or OH number…" oninput="renderBrowse()">
+    <div class="results-count" id="browseCount"></div>
+    <div class="browse-results" id="browseResults"></div>
+  </div>
 
   <div class="updated" id="updatedNote"></div>
 
 </div>
 
 <script>
+// ── Data & helpers ──────────────────────────────────────────────
+
 let allData = [];
-let activeFilter = 'all';
+let dataByKey = {};   // "HVAC|Thermodynamics|7-4" → entry
+
+// OH115 = March 2, 2026; biweekly Mondays
+const OH115_DATE = new Date('2026-03-02');
+
+function getOHDate(ohNum) {
+  const d = new Date(OH115_DATE);
+  d.setDate(d.getDate() + (ohNum - 115) * 14);
+  return d;
+}
+
+function formatOHDate(ohNum) {
+  return getOHDate(ohNum).toLocaleDateString('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric'
+  });
+}
+
+// ── Load data ───────────────────────────────────────────────────
 
 async function loadData() {
   const res = await fetch('data.json');
   const json = await res.json();
 
-  // Flatten into a single array
   for (const [program, problems] of Object.entries(json)) {
     if (program === 'lastUpdated') continue;
     for (const p of problems) {
-      allData.push({ program, ...p });
+      const entry = { program, ...p };
+      allData.push(entry);
+      dataByKey[`${program}|${p.module}|${p.problem}`] = entry;
     }
   }
 
   document.getElementById('updatedNote').textContent =
-    `Last updated: ${json.lastUpdated} · ${allData.length} problems across HVAC and TFS`;
+    `Last updated: ${json.lastUpdated} · ${allData.length} problems tracked`;
 
-  buildModuleFilter();
-  buildStats(json);
-  render();
+  renderBrowse();
 }
 
-function buildModuleFilter() {
-  const select = document.getElementById('moduleFilter');
-  const modules = [...new Set(allData.map(d => d.module))].sort();
+// ── Lookup mode ─────────────────────────────────────────────────
+
+function onProgramChange() {
+  const program = document.getElementById('selProgram').value;
+  const modSel = document.getElementById('selModule');
+  const probSel = document.getElementById('selProblem');
+
+  modSel.innerHTML = '<option value="">— Choose —</option>';
+  probSel.innerHTML = '<option value="">— Choose —</option>';
+  modSel.disabled = !program;
+  probSel.disabled = true;
+  showPlaceholder();
+
+  if (!program) return;
+
+  const modules = [...new Set(
+    allData.filter(d => d.program === program).map(d => d.module)
+  )];
+
   for (const m of modules) {
     const opt = document.createElement('option');
     opt.value = m;
     opt.textContent = m;
-    select.appendChild(opt);
+    modSel.appendChild(opt);
   }
 }
 
-function buildStats(json) {
-  const hvacTotal = json.HVAC.length;
-  const tfsTotal = json.TFS.length;
-  const hvacCovered = json.HVAC.filter(p => p.oh.length > 0).length;
-  const tfsCovered = json.TFS.filter(p => p.oh.length > 0).length;
+function onModuleChange() {
+  const program = document.getElementById('selProgram').value;
+  const module = document.getElementById('selModule').value;
+  const probSel = document.getElementById('selProblem');
 
-  // Find max OH number
-  let maxOH = 0;
-  for (const d of allData) for (const n of d.oh) if (n > maxOH) maxOH = n;
+  probSel.innerHTML = '<option value="">— Choose —</option>';
+  probSel.disabled = !module;
+  showPlaceholder();
 
-  document.getElementById('statsBar').innerHTML = `
-    <div class="stat"><strong>${hvacCovered}/${hvacTotal}</strong>HVAC problems covered</div>
-    <div class="stat"><strong>${tfsCovered}/${tfsTotal}</strong>TFS problems covered</div>
-    <div class="stat"><strong>OH${maxOH}</strong>Most recent session</div>
-  `;
+  if (!module) return;
+
+  const problems = allData
+    .filter(d => d.program === program && d.module === module)
+    .sort((a, b) => sortProblem(a.problem) - sortProblem(b.problem));
+
+  for (const p of problems) {
+    const opt = document.createElement('option');
+    opt.value = p.problem;
+    opt.textContent = p.problem;
+    probSel.appendChild(opt);
+  }
 }
 
-function getFilteredData() {
-  const query = document.getElementById('searchInput').value.toLowerCase().trim();
-  const module = document.getElementById('moduleFilter').value;
-
-  return allData.filter(d => {
-    // Program filter
-    if (activeFilter === 'HVAC' && d.program !== 'HVAC') return false;
-    if (activeFilter === 'TFS' && d.program !== 'TFS') return false;
-    if (activeFilter === 'covered' && d.oh.length === 0) return false;
-    if (activeFilter === 'not-covered' && d.oh.length > 0) return false;
-
-    // Module filter
-    if (module && d.module !== module) return false;
-
-    // Text search
-    if (query) {
-      const searchable = `${d.problem} ${d.module} ${d.program} ${d.oh.join(' ')}`.toLowerCase();
-      if (!searchable.includes(query)) return false;
-    }
-
-    return true;
-  });
+function sortProblem(probStr) {
+  const parts = probStr.split('-');
+  const last = parseInt(parts[parts.length - 1], 10);
+  return isNaN(last) ? 9999 : last;
 }
 
-function render() {
-  const filtered = getFilteredData();
-  const grid = document.getElementById('resultsGrid');
-  const meta = document.getElementById('resultsMeta');
+function onProblemChange() {
+  const program = document.getElementById('selProgram').value;
+  const module = document.getElementById('selModule').value;
+  const problem = document.getElementById('selProblem').value;
 
-  meta.textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
+  if (!problem) { showPlaceholder(); return; }
 
-  if (filtered.length === 0) {
-    grid.innerHTML = `
-      <div class="empty-state">
-        <div class="big">🔍</div>
-        <h3>No results found</h3>
-        <p>Try a different search term or clear the filters</p>
+  const entry = dataByKey[`${program}|${module}|${problem}`];
+  if (!entry) { showPlaceholder(); return; }
+
+  renderResult(entry);
+}
+
+function showPlaceholder() {
+  document.getElementById('resultArea').innerHTML = `
+    <div class="placeholder">
+      <div class="icon">👆</div>
+      Select a program, module, and problem to see its Office Hours history
+    </div>`;
+}
+
+function renderResult(entry) {
+  const cls = entry.program.toLowerCase();
+  const progLabel = entry.program === 'HVAC' ? 'HVAC & Refrigeration' : 'Thermal & Fluid Systems';
+
+  let bodyHtml;
+  if (entry.oh.length === 0) {
+    bodyHtml = `
+      <div class="not-covered">
+        <div class="icon">📭</div>
+        <p>This problem hasn't been covered in Office Hours yet.</p>
       </div>`;
+  } else {
+    const rows = entry.oh.map(n => `
+      <div class="oh-row">
+        <span class="oh-num">OH ${n}</span>
+        <span class="oh-date">${formatOHDate(n)}</span>
+      </div>`).join('');
+
+    bodyHtml = `
+      <div class="result-body">
+        <h3>Covered in ${entry.oh.length} Office Hours session${entry.oh.length > 1 ? 's' : ''}</h3>
+        <div class="oh-list">${rows}</div>
+      </div>`;
+  }
+
+  document.getElementById('resultArea').innerHTML = `
+    <div class="result-card">
+      <div class="result-header">
+        <span class="program-pill ${cls}">${entry.program}</span>
+        <div>
+          <div class="result-title">${entry.problem}</div>
+          <div class="result-module">${entry.module}</div>
+        </div>
+      </div>
+      ${bodyHtml}
+    </div>`;
+}
+
+// ── Browse mode ─────────────────────────────────────────────────
+
+function renderBrowse() {
+  const query = (document.getElementById('browseSearch')?.value || '').toLowerCase().trim();
+  const countEl = document.getElementById('browseCount');
+  const resultsEl = document.getElementById('browseResults');
+
+  let filtered = allData;
+  if (query) {
+    filtered = allData.filter(d => {
+      const searchable = `${d.program} ${d.module} ${d.problem} ${d.oh.join(' ')}`.toLowerCase();
+      return searchable.includes(query);
+    });
+  }
+
+  // Only show covered problems by default (less noise)
+  const hasCoveredFilter = !query;
+  const display = hasCoveredFilter ? filtered.filter(d => d.oh.length > 0) : filtered;
+
+  countEl.textContent = query
+    ? `${display.length} result${display.length !== 1 ? 's' : ''}`
+    : `${display.length} problems covered in Office Hours`;
+
+  if (display.length === 0) {
+    resultsEl.innerHTML = `<div class="browse-empty">No results found</div>`;
     return;
   }
 
-  grid.innerHTML = filtered.map(d => {
+  resultsEl.innerHTML = display.map(d => {
     const cls = d.program.toLowerCase();
-    const ohHtml = d.oh.length > 0
-      ? d.oh.map(n => `<span class="oh-badge">OH ${n}</span>`).join('')
-      : `<span class="no-oh">Not yet covered in Office Hours</span>`;
+    const chips = d.oh.map(n =>
+      `<span class="oh-chip" title="${formatOHDate(n)}">OH ${n}</span>`
+    ).join('');
 
     return `
-      <div class="result-card ${cls}">
-        <div class="result-main">
-          <div class="result-header">
-            <span class="program-badge ${cls}">${d.program}</span>
-            <span class="problem-id">${d.problem}</span>
-            <span class="module-name">${d.module}</span>
-          </div>
-          <div class="oh-badges">${ohHtml}</div>
+      <div class="browse-card ${cls}" onclick="jumpToLookup('${d.program}','${d.module}','${d.problem}')">
+        <div class="browse-card-header">
+          <span class="program-pill ${cls}" style="font-size:0.65rem;padding:2px 6px">${d.program}</span>
+          <strong class="browse-meta">${d.problem}</strong>
+          <span class="browse-module">${d.module}</span>
+        </div>
+        <div class="browse-oh-chips">
+          ${d.oh.length > 0 ? chips : '<span style="font-size:0.78rem;color:#9ca3af;font-style:italic">Not yet covered</span>'}
         </div>
       </div>`;
   }).join('');
 }
 
-// Event listeners
-document.getElementById('searchInput').addEventListener('input', render);
-document.getElementById('moduleFilter').addEventListener('change', render);
+function jumpToLookup(program, module, problem) {
+  setMode('lookup');
 
-document.querySelectorAll('.filter-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    activeFilter = tab.dataset.filter;
-    render();
-  });
-});
+  const selProg = document.getElementById('selProgram');
+  selProg.value = program;
+  onProgramChange();
+
+  setTimeout(() => {
+    const selMod = document.getElementById('selModule');
+    selMod.value = module;
+    onModuleChange();
+
+    setTimeout(() => {
+      const selProb = document.getElementById('selProblem');
+      selProb.value = problem;
+      onProblemChange();
+    }, 20);
+  }, 20);
+}
+
+// ── Mode toggle ─────────────────────────────────────────────────
+
+function setMode(mode) {
+  document.getElementById('lookupPanel').classList.toggle('hidden', mode !== 'lookup');
+  document.getElementById('browsePanel').classList.toggle('visible', mode === 'browse');
+  document.getElementById('btnLookup').classList.toggle('active', mode === 'lookup');
+  document.getElementById('btnBrowse').classList.toggle('active', mode === 'browse');
+}
 
 loadData();
 </script>
