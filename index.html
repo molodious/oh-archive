@@ -681,50 +681,34 @@ function setMode(mode) {
   document.getElementById('btnBrowse').classList.toggle('active', mode === 'browse');
 }
 
-// ── Next OH date (biweekly from OH115 = March 2 2026 8PM ET) ────
-function computeNextOH() {
-  // OH115 start time in ET (UTC-5 in March = EST)
-  const OH115 = new Date('2026-03-02T20:00:00-05:00');
-  const MS_PER_OH = 14 * 24 * 60 * 60 * 1000;
-  const now = new Date();
+// ── Next OH date (from config.json, sourced from Google Calendar) ──
+async function renderNextOH() {
+  try {
+    const res = await fetch('config.json');
+    const cfg = await res.json();
+    const { number, isoDate, display, time } = cfg.nextOH;
 
-  // How many full cycles since OH115?
-  const elapsed = now - OH115;
-  const cyclesSince = Math.floor(elapsed / MS_PER_OH);
+    const date = new Date(isoDate);
+    const now = new Date();
 
-  // The next upcoming session
-  const nextNum = 115 + cyclesSince + (elapsed > 0 ? 1 : 0);
-  const nextDate = new Date(OH115.getTime() + (nextNum - 115) * MS_PER_OH);
+    document.getElementById('nextOHDate').textContent = `OH ${number} · ${display} at ${time}`;
 
-  // If within 30 min past start, still show it as "today"
-  const thirtyMin = 30 * 60 * 1000;
-  const effectiveDate = (now - nextDate) < thirtyMin ? nextDate : new Date(OH115.getTime() + (nextNum) * MS_PER_OH);
-  const effectiveNum  = (now - nextDate) < thirtyMin ? nextNum : nextNum + 1;
-
-  return { num: effectiveNum, date: effectiveDate };
-}
-
-function renderNextOH() {
-  const { num, date } = computeNextOH();
-  const now = new Date();
-
-  const dateStr = date.toLocaleDateString('en-US', {
-    weekday: 'short', month: 'short', day: 'numeric', year: 'numeric',
-    timeZone: 'America/New_York'
-  });
-
-  document.getElementById('nextOHDate').textContent = `OH ${num} · ${dateStr} at 8:00 PM ET`;
-
-  // Countdown
-  const diffMs = date - now;
-  if (diffMs < 0) {
-    document.getElementById('nextOHCountdown').textContent = 'Tonight!';
-  } else {
-    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-    const hrs  = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    if (days === 0) document.getElementById('nextOHCountdown').textContent = `in ${hrs}h`;
-    else if (days === 1) document.getElementById('nextOHCountdown').textContent = `tomorrow`;
-    else document.getElementById('nextOHCountdown').textContent = `in ${days} days`;
+    // Countdown
+    const diffMs = date - now;
+    const countdownEl = document.getElementById('nextOHCountdown');
+    if (diffMs <= 0 && diffMs > -3 * 60 * 60 * 1000) {
+      countdownEl.textContent = 'Tonight!';
+    } else if (diffMs <= 0) {
+      countdownEl.textContent = '';
+    } else {
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const hrs  = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      if (days === 0) countdownEl.textContent = `in ${hrs}h`;
+      else if (days === 1) countdownEl.textContent = 'tomorrow';
+      else countdownEl.textContent = `in ${days} days`;
+    }
+  } catch(e) {
+    document.getElementById('nextOHDate').textContent = 'See calendar for next date';
   }
 }
 

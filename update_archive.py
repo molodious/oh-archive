@@ -117,6 +117,15 @@ def add_oh_to_problems(data, oh_num, clips_dir):
     return updated
 
 
+def update_next_oh_config():
+    """Pull next OH from Google Calendar and update config.json."""
+    try:
+        import update_config
+        update_config.main()
+    except Exception as e:
+        print(f"  ⚠️  Could not update config.json: {e}")
+
+
 def git_push(oh_num, updated_problems):
     """Commit and push to GitHub Pages."""
     os.chdir(ARCHIVE_DIR)
@@ -161,9 +170,12 @@ def main():
         save_data(data)
         print(f"\n💾 Saved data.json ({len(updated)} updates)")
         git_push(oh_num, updated)
-        print(f"\n🌐 Live at: https://molodious.github.io/oh-archive/")
-    else:
-        print("\nNo updates made.")
+
+    # Always refresh the next OH date from calendar
+    print("\n📅 Updating next OH from Google Calendar...")
+    update_next_oh_config()
+
+    print(f"\n🌐 Live at: https://archive.mechanicalpeexamprep.com")
 
 
 if __name__ == '__main__':
