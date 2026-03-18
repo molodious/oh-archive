@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-03-17",
+  "lastUpdated": "2026-03-18",
   "HVAC": [
     {
       "module": "Thermodynamics",
@@ -4193,5 +4193,75 @@
       "problem": "13-80",
       "oh": []
     }
-  ]
+  ],
+  "7-21": {
+    "module": "Fluids",
+    "problem": "21",
+    "oh": [
+      116
+    ]
+  },
+  "7-22": {
+    "module": "Psychrometrics",
+    "problem": "9",
+    "oh": [
+      116
+    ]
+  },
+  "7-23": {
+    "module": "Psychrometrics",
+    "problem": "11",
+    "oh": [
+      116
+    ]
+  },
+  "7-24": {
+    "module": "Psychrometrics",
+    "problem": "12",
+    "oh": [
+      116
+    ]
+  },
+  "7-25": {
+    "module": "Psychrometrics",
+    "problem": "13",
+    "oh": [
+      116
+    ]
+  },
+  "7-26": {
+    "module": "Psychrometrics",
+    "problem": "15",
+    "oh": [
+      116
+    ]
+  },
+  "7-27": {
+    "module": "HVAC",
+    "problem": "5",
+    "oh": [
+      116
+    ]
+  },
+  "8-26": {
+    "module": "Heat Transfer",
+    "problem": "26",
+    "oh": [
+      116
+    ]
+  },
+  "8-27": {
+    "module": "Energy & Power System Applications",
+    "problem": "16",
+    "oh": [
+      116
+    ]
+  },
+  "8-28": {
+    "module": "Practice Exam #1",
+    "problem": "45",
+    "oh": [
+      116
+    ]
+  }
 }
