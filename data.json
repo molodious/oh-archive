@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-05-12",
+  "lastUpdated": "2026-05-26",
   "HVAC": [
     {
       "module": "Thermodynamics",
@@ -615,7 +615,8 @@
       "module": "Psychrometrics",
       "problem": "9-15",
       "oh": [
-        5
+        5,
+        121
       ]
     },
     {
@@ -883,7 +884,8 @@
       "problem": "11-5",
       "oh": [
         116,
-        120
+        120,
+        121
       ]
     },
     {
@@ -2085,7 +2087,8 @@
       "module": "Practice Exam #2",
       "problem": "15-14",
       "oh": [
-        70
+        70,
+        121
       ]
     },
     {
