@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-21",
+  "lastUpdated": "2026-08-04",
   "HVAC": [
     {
       "module": "Thermodynamics",
@@ -1476,7 +1476,8 @@
       "problem": "13-21",
       "oh": [
         64,
-        71
+        71,
+        126
       ]
     },
     {
@@ -1513,7 +1514,8 @@
         105,
         115,
         122,
-        125
+        125,
+        126
       ]
     },
     {
@@ -2549,13 +2551,16 @@
       "oh": [
         106,
         107,
-        113
+        113,
+        126
       ]
     },
     {
       "module": "Thermodynamics",
       "problem": "7-8",
-      "oh": []
+      "oh": [
+        126
+      ]
     },
     {
       "module": "Thermodynamics",
@@ -3524,7 +3529,9 @@
     {
       "module": "Practice Exam #1",
       "problem": "12-12",
-      "oh": []
+      "oh": [
+        126
+      ]
     },
     {
       "module": "Practice Exam #1",
@@ -3699,7 +3706,9 @@
     {
       "module": "Practice Exam #1",
       "problem": "12-45",
-      "oh": []
+      "oh": [
+        126
+      ]
     },
     {
       "module": "Practice Exam #1",
