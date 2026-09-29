@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-15",
+  "lastUpdated": "2026-09-29",
   "HVAC": [
     {
       "module": "Thermodynamics",
@@ -144,7 +144,8 @@
       "oh": [
         72,
         88,
-        106
+        106,
+        130
       ]
     },
     {
@@ -579,7 +580,8 @@
       "module": "Psychrometrics",
       "problem": "9-10",
       "oh": [
-        80
+        80,
+        130
       ]
     },
     {
@@ -638,7 +640,8 @@
       "module": "Psychrometrics",
       "problem": "9-17",
       "oh": [
-        80
+        80,
+        130
       ]
     },
     {
@@ -808,7 +811,8 @@
         105,
         106,
         112,
-        119
+        119,
+        130
       ]
     },
     {
@@ -2918,7 +2922,8 @@
       "module": "Hydraulic & Fluid Applications",
       "problem": "9-8",
       "oh": [
-        51
+        51,
+        130
       ]
     },
     {
@@ -3018,7 +3023,9 @@
     {
       "module": "Hydraulic & Fluid Applications",
       "problem": "9-26",
-      "oh": []
+      "oh": [
+        130
+      ]
     },
     {
       "module": "Hydraulic & Fluid Applications",
@@ -3083,7 +3090,9 @@
     {
       "module": "Hydraulic & Fluid Applications",
       "problem": "9-38",
-      "oh": []
+      "oh": [
+        130
+      ]
     },
     {
       "module": "Hydraulic & Fluid Applications",
@@ -3113,7 +3122,9 @@
     {
       "module": "Hydraulic & Fluid Applications",
       "problem": "9-44",
-      "oh": []
+      "oh": [
+        130
+      ]
     },
     {
       "module": "Hydraulic & Fluid Applications",
@@ -3318,7 +3329,8 @@
       "module": "Energy & Power System Applications",
       "problem": "10-21",
       "oh": [
-        108
+        108,
+        130
       ]
     },
     {
